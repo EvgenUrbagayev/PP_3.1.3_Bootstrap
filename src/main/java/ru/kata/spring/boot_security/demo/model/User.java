@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -22,7 +23,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    public User(Collection<Role> roles) {
+    public User(Set<Role> roles) {
         this.roles = roles;
     }
 
@@ -30,19 +31,19 @@ public class User implements UserDetails {
 
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
     public User(Long id, String name, String surname, int age, String password, Collection<Role> roles) {
         this.id = id;
@@ -50,7 +51,7 @@ public class User implements UserDetails {
         this.surname = surname;
         this.age = age;
         this.password = password;
-        this.roles = roles;
+        this.roles = (Set<Role>) roles;
     }
 
     public Long getId() {
