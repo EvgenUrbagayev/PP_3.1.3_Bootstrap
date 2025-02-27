@@ -10,4 +10,6 @@ public interface RoleDAO {
     List<Role> findAll();
 
     Role findRoleByAuthority(String authority) throws NoSuchElementException;
+
+    void save(Role role);
 }

@@ -26,4 +26,9 @@ public class RoleDAOImpl implements RoleDAO {
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(String.format("Role '%s' not found", authority)));
     }
+
+    @Override
+    public void save(Role role) {
+        entityManager.persist(role);
+    }
 }
