@@ -79,6 +79,7 @@
                                 <tr>
                                     <th scope="col"><strong>Id</strong></th>
                                     <th scope="col"><strong>Name</strong></th>
+                                    <th scope="col"><strong>Surname</strong></th>
                                     <th scope="col"><strong>Age</strong></th>
                                     <th scope="col"><strong>Roles</strong></th>
                                 </tr>
@@ -87,6 +88,7 @@
                                 <tr th:each="user : ${users}">
                                     <td><a th:text="${user.getId()}"></a></td>
                                     <td><a th:text="${user.getName()}"></a></td>
+                                    <td><a th:text="${user.getSurname()}"></a></td>
                                     <td><a th:text="${user.getAge()}"></a></td>
                                     <td>
                                         <span th:each="role : ${user.getRoles()}"
@@ -128,6 +130,16 @@
                                                                            th:name="name"
                                                                            th:value="${user.name}"
                                                                            placeholder="Name">
+                                                                </div>
+                                                                <div class="row mb-4">
+                                                                    <label for="surname-edit"
+                                                                           class="fw-bold text-center">Surname</label>
+                                                                    <input type="text"
+                                                                           id="surname-edit"
+                                                                           class="form-control"
+                                                                           th:name="surname"
+                                                                           th:value="${user.surname}"
+                                                                           placeholder="Surname">
                                                                 </div>
                                                                 <div class="row mb-4">
                                                                     <label for="age-edit"
@@ -224,6 +236,17 @@
                                                                            th:name="name"
                                                                            th:value="${user.name}"
                                                                            placeholder="Username">
+                                                                </div>
+                                                                <div class="row mb-4">
+                                                                    <label for="surname-delete"
+                                                                           class="fw-bold text-center">Surname</label>
+                                                                    <input type="text"
+                                                                           id="surname-delete"
+                                                                           class="form-control"
+                                                                           readonly
+                                                                           th:name="surname"
+                                                                           th:value="${user.surname}"
+                                                                           placeholder="Surname">
                                                                 </div>
                                                                 <div class="row mb-4">
                                                                     <label for="age-delete"
@@ -358,6 +381,7 @@
                                 <tr>
                                     <th scope="col"><strong>ID</strong></th>
                                     <th scope="col"><strong>Name</strong></th>
+                                    <th scope="col"><strong>Surname</strong></th>
                                     <th scope="col"><strong>Age</strong></th>
                                     <th scope="col"><strong>Password</strong></th>
                                     <th scope="col"><strong>Roles</strong></th>
@@ -367,6 +391,7 @@
                                 <tr th:each="user : ${users}">
                                     <td><a th:text="${user.getId()}"></a></td>
                                     <td><a th:text="${user.getName()}"></a></td>
+                                    <td><a th:text="${user.getSurname()}"></a></td>
                                     <td><a th:text="${user.getAge()}"></a></td>
                                     <td><a th:text="${user.getPassword()}"></a></td>
                                     <td>
@@ -433,5 +458,3 @@
 <!--    </form>-->
 <!--</div>-->
 <!--</body>-->
-
-

@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userDAO.findAll();
     }
 
+    @Override
+    public void updateUser(User user) {
+        userDAO.saveUser(user);
+    }
+
 
     @Override
     public void saveUser(User user) {

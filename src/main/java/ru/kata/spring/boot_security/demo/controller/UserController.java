@@ -43,10 +43,10 @@ public class UserController {
         return "admin-list";
     }
 
-    @GetMapping("/admin-create")
-    public String createUserForm(User user) {
-        return "admin-create";
-    }
+//    @GetMapping("/admin-create")
+//    public String createUserForm(User user) {
+//        return "admin-create";
+//    }
 
     @PostMapping("/admin-create")
     public String createUser(User user) {
@@ -54,10 +54,10 @@ public class UserController {
         return "redirect:/admin-list";
     }
 
-    @GetMapping("/admin-delete")
-    public String deleteUser(@RequestParam("userId") Long id) {
+    @PostMapping("admin/deleteUser")
+    public String deleteUser(@RequestParam Long id) {
         userService.deleteById(id);
-        return "redirect:/admin-list";
+        return "redirect:/admin";
     }
 
     @GetMapping("/admin-update")
