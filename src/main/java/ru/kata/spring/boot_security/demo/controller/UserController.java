@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
@@ -33,10 +31,8 @@ public class UserController {
         this.roleService = roleService;
     }
 
-
     @GetMapping("/user")
     public String showUserInfo(Model model, Principal principal) {
-//        List<User> users = userService.findAll();
         model.addAttribute("user", userService.findByUsername(principal.getName()));
         return "user";
     }
@@ -74,22 +70,4 @@ public class UserController {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
-
-//    @GetMapping("/admin-update")
-//    public String updateUserForm(@RequestParam("userId") Long id, Model model) {
-//        User user = userService.getUser(id);
-//        model.addAttribute("user", user);
-//        return "admin-update";
-//    }
-
-//    @PostMapping("/admin/updateUser")
-//    public String updateUser(@ModelAttribute("user") User user,
-//                             @RequestParam("roles") List<Long> roleIds) {
-//        Set<Role> roles = roleIds.stream()
-//                        .map(roleService::findById)
-//                                .collect(Collectors.toSet());
-//        user.setRoles(roles);
-//        userService.updateUser(user);
-//        return "redirect:/admin-list";
-//    }
 }
