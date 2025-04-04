@@ -91,6 +91,11 @@ public class User implements UserDetails {
         return roles;
     }
 
+    public boolean isAdmin() {
+        return roles.stream()
+                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+    }
+
     public String getPassword() {
         return password;
     }

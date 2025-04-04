@@ -5,8 +5,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.DAO.RoleDAO;
-import ru.kata.spring.boot_security.demo.DAO.UserDAO;
+
+import ru.kata.spring.boot_security.demo.DAO.RoleRepository;
+import ru.kata.spring.boot_security.demo.DAO.UserRepository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -16,14 +17,14 @@ import java.util.Collections;
 @Transactional
 public class UserInitializer implements CommandLineRunner {
 
-    private final UserDAO userDAO;
-    private final RoleDAO roleDAO;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserInitializer(UserDAO userDAO, RoleDAO roleDAO, PasswordEncoder passwordEncoder) {
-        this.userDAO = userDAO;
-        this.roleDAO = roleDAO;
+    public UserInitializer(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -31,12 +32,12 @@ public class UserInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Role adminRole = new Role();
-        adminRole.setName("ROLE_ADMIN");
-        roleDAO.save(adminRole);
+        adminRole.setAuthority("ROLE_ADMIN");
+        roleRepository.save(adminRole);
 
         Role userRole = new Role();
-        userRole.setName("ROLE_USER");
-        roleDAO.save(userRole);
+        userRole.setAuthority("ROLE_USER");
+        roleRepository.save(userRole);
 
 
         User user = new User();
@@ -45,7 +46,7 @@ public class UserInitializer implements CommandLineRunner {
         user.setAge(30);
         user.setPassword(passwordEncoder.encode("user"));
         user.setRoles(Collections.singleton(userRole));
-        userDAO.saveUser(user);
+        userRepository.save(user);
 
 
         User admin = new User();
@@ -54,7 +55,7 @@ public class UserInitializer implements CommandLineRunner {
         admin.setAge(40);
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRoles(Collections.singleton(adminRole));
-        userDAO.saveUser(admin);
+        userRepository.save(admin);
 
     }
 }
